@@ -10,7 +10,6 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 import { Controller, useForm } from "react-hook-form";
-import { Rating } from "react-simple-star-rating";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formatStringOnlyDigits } from "@/utils";
 import { EXPENSE_TYPE, EXPENSE_TYPES_ARRAY } from "@/app/models/expense";
@@ -19,10 +18,14 @@ import {
   addExpensesFormDefaultValues,
   addExpensesFormValidationSchema,
   IAddExpenseFormInput,
+  resetFormAndValues,
+  setStringValueToNumber,
 } from "./add-expenses-form.form";
 import { addExpenseRequest } from "./add-expenses-form.utils";
+import { useRouter } from "next/router";
 
 export const AddExpensesForm = () => {
+  const router = useRouter();
   const todaysDate = today(getLocalTimeZone());
 
   const {
@@ -39,13 +42,11 @@ export const AddExpensesForm = () => {
 
   const expense_type = watch("expense_type");
 
-  const onRatingChange = (value: number) => {
-    setValue("luxury_rating", value, { shouldValidate: true });
-  };
-
   const onSubmit = async (data: IAddExpenseFormInput) => {
     try {
       await addExpenseRequest(data);
+
+      router.push("/expenses");
     } catch (err) {
       console.error("Unexpected error:", err);
     }
@@ -56,7 +57,7 @@ export const AddExpensesForm = () => {
       try {
         await addExpenseRequest(data);
 
-        // TODO: Reset the form
+        resetFormAndValues(data, reset);
       } catch (err) {
         console.error("Unexpected error:", err);
       }
@@ -119,12 +120,9 @@ export const AddExpensesForm = () => {
                     id="price"
                     variant="bordered"
                     {...field}
-                    onChange={(e) => {
-                      const value = formatStringOnlyDigits(e.target.value);
-                      setValue("price", value, {
-                        shouldValidate: true,
-                      });
-                    }}
+                    onChange={(e) =>
+                      setStringValueToNumber(e.target.value, "price", setValue)
+                    }
                   />
                 )}
               />
@@ -144,12 +142,9 @@ export const AddExpensesForm = () => {
                     defaultValue="1"
                     className="max-w-16"
                     {...field}
-                    onChange={(e) => {
-                      const value = formatStringOnlyDigits(e.target.value);
-                      setValue("amount", value, {
-                        shouldValidate: true,
-                      });
-                    }}
+                    onChange={(e) =>
+                      setStringValueToNumber(e.target.value, "amount", setValue)
+                    }
                   />
                 )}
               />
@@ -187,6 +182,7 @@ export const AddExpensesForm = () => {
               id="is_subscription"
               color="default"
               className="text-xs"
+              isSelected={watch("is_subscription")}
               onChange={(e) => {
                 setValue("is_subscription", e.target.checked, {
                   shouldValidate: true,
@@ -196,14 +192,30 @@ export const AddExpensesForm = () => {
               Is Subscription?
             </Checkbox>
             <div className="flex flex-col items-center gap-x-2">
-              <p className="text-sm">Luxury rating</p>
-              <Rating
-                iconsCount={3}
-                initialValue={1}
-                SVGstyle={{ display: "inline-block" }}
-                showTooltip={false}
-                onClick={(_, index) => onRatingChange(index + 1)}
+              <Controller
+                name="luxury_rating"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    label="Luxury rating"
+                    id="luxury_rating"
+                    variant="underlined"
+                    defaultValue="1"
+                    className="max-w-16"
+                    value={field.value.toString()}
+                    onChange={(e) => {
+                      const value = formatStringOnlyDigits(e.target.value);
+                      const parsedValue = parseInt(value);
+                      setValue("luxury_rating", parsedValue, {
+                        shouldValidate: true,
+                      });
+                    }}
+                  />
+                )}
               />
+              {errors.luxury_rating && (
+                <ErrorMessage>Luxury rating must be 1, 2, or 3.</ErrorMessage>
+              )}
             </div>
           </div>
           {expense_type === EXPENSE_TYPE.Food && (
@@ -218,12 +230,9 @@ export const AddExpensesForm = () => {
                     variant="bordered"
                     className="max-w-xs"
                     {...field}
-                    onChange={(e) => {
-                      const value = formatStringOnlyDigits(e.target.value);
-                      setValue("weight", value, {
-                        shouldValidate: true,
-                      });
-                    }}
+                    onChange={(e) =>
+                      setStringValueToNumber(e.target.value, "weight", setValue)
+                    }
                   />
                 )}
               />
@@ -237,12 +246,13 @@ export const AddExpensesForm = () => {
                     variant="bordered"
                     className="max-w-xs"
                     {...field}
-                    onChange={(e) => {
-                      const value = formatStringOnlyDigits(e.target.value);
-                      setValue("protein_per_100g", value, {
-                        shouldValidate: true,
-                      });
-                    }}
+                    onChange={(e) =>
+                      setStringValueToNumber(
+                        e.target.value,
+                        "protein_per_100g",
+                        setValue
+                      )
+                    }
                   />
                 )}
               />

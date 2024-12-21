@@ -8,6 +8,7 @@ export enum EXPENSE_TYPE {
   Transport,
   Entertainment,
   Travel,
+  Fitness,
   Other = 99,
 }
 
@@ -18,7 +19,7 @@ export const EXPENSE_TYPES_ARRAY = Object.entries(EXPENSE_TYPE)
     name: key,
   }));
 
-export interface IAddExpenseBody {
+export interface IPostExpenseBody {
   name: string;
   expense_type: EXPENSE_TYPE;
   price: number;

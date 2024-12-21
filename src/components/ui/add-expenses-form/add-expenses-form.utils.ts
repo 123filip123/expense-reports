@@ -1,9 +1,9 @@
-import { EXPENSE_TYPE, IAddExpenseBody } from "@/app/models/expense";
+import { EXPENSE_TYPE, IPostExpenseBody } from "@/app/models/expense";
 import { IAddExpenseFormInput } from "./add-expenses-form.form";
-import { supabase } from "@/libs/supabaseClient";
+import { postExpense } from "@/app/api/expenses/expenses.api";
 
 export const addExpenseRequest = async (data: IAddExpenseFormInput) => {
-  const body: IAddExpenseBody = {
+  const body: IPostExpenseBody = {
     name: data.expense_name,
     expense_type:
       data.expense_type === -1 ? EXPENSE_TYPE.Other : data.expense_type,
@@ -21,10 +21,7 @@ export const addExpenseRequest = async (data: IAddExpenseFormInput) => {
     luxury_rating: data.luxury_rating,
   };
 
-  const { data: result, error } = await supabase
-    .from("expenses")
-    .insert(body)
-    .select("*");
+  const { result, error } = await postExpense(body);
 
   if (error) {
     console.error("Error inserting expense:", error.message);
