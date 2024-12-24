@@ -22,7 +22,7 @@ import {
   setStringValueToNumber,
 } from "./add-expenses-form.form";
 import { addExpenseRequest } from "./add-expenses-form.utils";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export const AddExpensesForm = () => {
   const router = useRouter();
