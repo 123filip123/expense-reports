@@ -1,23 +1,66 @@
 export enum EXPENSE_TYPE {
-  Food = 1,
-  Groceries,
-  Household,
-  Utilities,
-  Health,
-  Clothing,
-  Transport,
-  Entertainment,
-  Travel,
-  Fitness,
-  Other = 99,
+  Food = 1, // green
+  Groceries, // dark blue
+  Household, // dark yellow
+  Utilities, // light blue
+  Health, // red
+  Clothing, // purple
+  Transport, // orange
+  Entertainment, // pink
+  Travel, // light yellow
+  Fitness, // light green
+  Other = 99, // grey
 }
-
+export const getExpenseTypeNames = (): string[] => {
+  return Object.keys(EXPENSE_TYPE).filter((key) => isNaN(Number(key)));
+};
 export const EXPENSE_TYPES_ARRAY = Object.entries(EXPENSE_TYPE)
   .filter(([_, value]) => typeof value === "number")
-  .map(([key, value]) => ({
-    key: value as number,
-    name: key,
-  }));
+  .map(([key, value]) => {
+    let color: string;
+    switch (value) {
+      case EXPENSE_TYPE.Food:
+        color = "#008000"; // green
+        break;
+      case EXPENSE_TYPE.Groceries:
+        color = "#00008B"; // dark blue
+        break;
+      case EXPENSE_TYPE.Household:
+        color = "#B8860B"; // dark yellow
+        break;
+      case EXPENSE_TYPE.Utilities:
+        color = "#ADD8E6"; // light blue
+        break;
+      case EXPENSE_TYPE.Health:
+        color = "#FF0000"; // red
+        break;
+      case EXPENSE_TYPE.Clothing:
+        color = "#800080"; // purple
+        break;
+      case EXPENSE_TYPE.Transport:
+        color = "#FFA500"; // orange
+        break;
+      case EXPENSE_TYPE.Entertainment:
+        color = "#FFC0CB"; // pink
+        break;
+      case EXPENSE_TYPE.Travel:
+        color = "#FFFFE0"; // light yellow
+        break;
+      case EXPENSE_TYPE.Fitness:
+        color = "#90EE90"; // light green
+        break;
+      case EXPENSE_TYPE.Other:
+        color = "#808080"; // grey
+        break;
+      default:
+        color = "#000000"; // Default color if none matches
+    }
+    return {
+      key: value as number,
+      name: key,
+      color,
+    };
+  });
 
 export interface IPostExpenseBody {
   name: string;
@@ -52,4 +95,20 @@ export interface IGetExpensesFilters {
   searchBoughtFrom?: string;
   expenseTypeFilter?: EXPENSE_TYPE;
   luxuryRatingFilter?: number;
+}
+
+export interface IMonthlyTypeExpenses {
+  month: string; // e.g., "Jan 24"
+  [expenseType: string]: number | string; // Dynamic keys for expense types with total spent
+}
+
+export interface IMonthlyLuxuryExpenses {
+  month: string; // e.g., "Jan 24"
+  [luxuryRating: string]: number | string; // Dynamic keys for expense types with total spent
+}
+
+export interface IMonthlyExpenses {
+  month: string; // e.g., "Jan 24"
+  expense_types: { [key: number]: number }; // Expense type ID to total spent
+  luxury_ratings: { [key: number]: number }; // Luxury rating to total spent
 }

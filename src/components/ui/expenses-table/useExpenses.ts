@@ -15,13 +15,8 @@ export const useExpenses = (
   const [expenses, setExpenses] = useState<IExpense[]>([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchExpenses();
-  }, [currentPage]);
-
   const fetchExpenses = useCallback(async () => {
     setLoading(true);
-
     try {
       // Fetch data from the expenses table with pagination
       const { data, error, count } = await getExpenses(currentPage);
@@ -32,7 +27,6 @@ export const useExpenses = (
       }
 
       // Update state with fetched data and total row count
-      console.log(data);
       setExpenses(data);
       setTotalCount(count);
     } catch (err) {
@@ -41,6 +35,10 @@ export const useExpenses = (
       setLoading(false);
     }
   }, [currentPage, setTotalCount]);
+
+  useEffect(() => {
+    fetchExpenses();
+  }, [currentPage, fetchExpenses]);
 
   return { expenses, loading, fetchExpenses };
 };

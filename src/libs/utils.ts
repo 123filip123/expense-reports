@@ -1,7 +1,3 @@
-export const formatStringOnlyDigits = (str: string) => {
-  return str.replace(/\D/g, "");
-};
-
 // Tremor cx [v0.0.0]
 
 import clsx, { type ClassValue } from "clsx";

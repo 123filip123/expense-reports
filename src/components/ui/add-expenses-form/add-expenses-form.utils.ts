@@ -27,6 +27,4 @@ export const addExpenseRequest = async (data: IAddExpenseFormInput) => {
     console.error("Error inserting expense:", error.message);
     return;
   }
-
-  console.log("Expense added successfully:", result);
 };
