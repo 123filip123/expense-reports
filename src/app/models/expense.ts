@@ -15,7 +15,7 @@ export const getExpenseTypeNames = (): string[] => {
   return Object.keys(EXPENSE_TYPE).filter((key) => isNaN(Number(key)));
 };
 export const EXPENSE_TYPES_ARRAY = Object.entries(EXPENSE_TYPE)
-  .filter(([_, value]) => typeof value === "number")
+  .filter(([, value]) => typeof value === "number")
   .map(([key, value]) => {
     let color: string;
     switch (value) {
@@ -88,6 +88,7 @@ export interface IExpense {
   protein_per_100g?: number;
   luxury_rating?: number;
   created_at: string;
+  [key: string]: number | string | boolean | undefined;
 }
 
 export interface IGetExpensesFilters {

@@ -1,10 +1,5 @@
-import { EXPENSE_TYPE } from "@/app/models/expense";
+import { EXPENSE_TYPE, IExpense } from "@/app/models/expense";
 import { Key } from "react";
-
-// Add index signature to IExpense
-interface IExpense {
-  [key: string]: any;
-}
 
 export const columns = [
   {
@@ -51,12 +46,11 @@ export const columns = [
 ];
 
 export const renderCell = (expense: IExpense, columnKey: Key) => {
-  const cellValue = expense[columnKey as string];
+  const cellValue = expense[columnKey.toString()];
 
   switch (columnKey) {
     case "expense_type":
-      EXPENSE_TYPE[cellValue];
-      return EXPENSE_TYPE[cellValue];
+      return EXPENSE_TYPE[cellValue as keyof typeof EXPENSE_TYPE];
     case "is_subscription":
       return cellValue ? "Yes" : "No";
     default:

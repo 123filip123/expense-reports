@@ -21,7 +21,7 @@ export const addExpenseRequest = async (data: IAddExpenseFormInput) => {
     luxury_rating: data.luxury_rating,
   };
 
-  const { data: result, error } = await postExpense(body);
+  const { error } = await postExpense(body);
 
   if (error) {
     console.error("Error inserting expense:", error.message);

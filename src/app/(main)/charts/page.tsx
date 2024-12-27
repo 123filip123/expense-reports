@@ -5,7 +5,7 @@ import { getExpenseTypeNames } from "../../models/expense";
 import { BarChart } from "@/components/ui/charts/bar-chart/bar-chart";
 
 export default function Page() {
-  const { typeExpenses, luxuryExpenses, loading } = useMonthlyExpenses();
+  const { typeExpenses, luxuryExpenses } = useMonthlyExpenses();
 
   return (
     <div>

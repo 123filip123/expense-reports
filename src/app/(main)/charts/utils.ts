@@ -1,5 +1,6 @@
 import {
   EXPENSE_TYPE,
+  IMonthlyExpenses,
   IMonthlyLuxuryExpenses,
   IMonthlyTypeExpenses,
 } from "@/app/models/expense";
@@ -35,7 +36,7 @@ export const mapExpenseTypeToName = (expenseType: number): string => {
 
 // Function to transform the data from SQL result
 export const transformExpensesData = (
-  data: any[]
+  data: IMonthlyExpenses[]
 ): {
   transformedTypes: IMonthlyLuxuryExpenses[];
   transformedLuxury: IMonthlyTypeExpenses[];
@@ -55,12 +56,14 @@ export const transformExpensesData = (
     // Convert the numeric expense type keys to their names for 'types'
     Object.keys(item.expense_types).forEach((key) => {
       const typeName = mapExpenseTypeToName(parseInt(key, 10)); // Convert the key to a number and map it
-      transformedTypes[typeName] = item.expense_types[key];
+      transformedTypes[typeName] =
+        item.expense_types[key as unknown as keyof typeof item.expense_types];
     });
 
     // Convert the numeric expense type keys to their names for 'luxury'
-    Object.keys(item.luxury_ratings).forEach((key) => {
-      transformedLuxury[key] = item.luxury_ratings[key];
+    Object.keys(item.luxury_ratings).forEach((key: string) => {
+      transformedLuxury[key] =
+        item.luxury_ratings[key as unknown as keyof typeof item.luxury_ratings];
     });
 
     transformedTypesArray.push(transformedTypes);
