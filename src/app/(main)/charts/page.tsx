@@ -1,7 +1,7 @@
 "use client";
 
 import { useMonthlyExpenses } from "./useMonthlyExpenses";
-import { getExpenseTypeNames } from "../models/expense";
+import { getExpenseTypeNames } from "../../models/expense";
 import { BarChart } from "@/components/ui/charts/bar-chart/bar-chart";
 
 export default function Page() {
