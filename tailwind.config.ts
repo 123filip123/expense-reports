@@ -90,5 +90,6 @@ export default {
     },
   },
   darkMode: "class",
-  plugins: [nextui(), require("@tailwindcss/forms")],
+  // plugins: [require("@tailwindcss/forms"), nextui()], // TODO: @tailwindcss/forms causes conflict with nextui Input fields, check if charts work without it
+  plugins: [nextui()],
 } satisfies Config;
