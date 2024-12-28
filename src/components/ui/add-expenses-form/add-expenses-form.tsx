@@ -178,19 +178,6 @@ export const AddExpensesForm = () => {
             }}
           />
           <div className="flex items-center gap-x-6">
-            <Checkbox
-              id="is_subscription"
-              color="default"
-              className="text-xs"
-              isSelected={watch("is_subscription")}
-              onChange={(e) => {
-                setValue("is_subscription", e.target.checked, {
-                  shouldValidate: true,
-                });
-              }}
-            >
-              Is Subscription?
-            </Checkbox>
             <div className="flex flex-col items-center gap-x-2">
               <Controller
                 name="luxury_rating"
@@ -218,46 +205,6 @@ export const AddExpensesForm = () => {
               )}
             </div>
           </div>
-          {expense_type === EXPENSE_TYPE.Food && (
-            <div className="flex items-center gap-x-2 w-full">
-              <Controller
-                name="weight"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    label="Weight"
-                    id="weight"
-                    variant="bordered"
-                    className="max-w-xs"
-                    {...field}
-                    onChange={(e) =>
-                      setStringValueToNumber(e.target.value, "weight", setValue)
-                    }
-                  />
-                )}
-              />
-              <Controller
-                name="protein_per_100g"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    label="Protein per 100g"
-                    id="protein_per_100g"
-                    variant="bordered"
-                    className="max-w-xs"
-                    {...field}
-                    onChange={(e) =>
-                      setStringValueToNumber(
-                        e.target.value,
-                        "protein_per_100g",
-                        setValue
-                      )
-                    }
-                  />
-                )}
-              />
-            </div>
-          )}
           {/* Wrapping the button in div because the parent div with flex causes the button to stretch */}
           <div className="mt-2 flex gap-x-2">
             <Button color="primary" type="submit">

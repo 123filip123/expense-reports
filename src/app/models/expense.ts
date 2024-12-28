@@ -69,9 +69,6 @@ export interface IPostExpenseBody {
   amount: number;
   bought_from?: string;
   date: string;
-  is_subscription: boolean;
-  weight?: number;
-  protein_per_100g?: number;
   luxury_rating?: number;
 }
 
@@ -83,9 +80,6 @@ export interface IExpense {
   price: number;
   amount: number;
   bought_from?: string;
-  is_subscription: boolean;
-  weight?: number;
-  protein_per_100g?: number;
   luxury_rating?: number;
   created_at: string;
   [key: string]: number | string | boolean | undefined;

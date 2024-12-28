@@ -26,22 +26,9 @@ export const columns = [
     key: "date",
     label: "Date",
   },
-
-  {
-    key: "weight",
-    label: "Weight",
-  },
-  {
-    key: "protein_per_100g",
-    label: "Protein per 100g",
-  },
   {
     key: "luxury_rating",
     label: "Luxury Rating",
-  },
-  {
-    key: "is_subscription",
-    label: "Subscription",
   },
 ];
 
@@ -51,8 +38,6 @@ export const renderCell = (expense: IExpense, columnKey: Key) => {
   switch (columnKey) {
     case "expense_type":
       return EXPENSE_TYPE[cellValue as keyof typeof EXPENSE_TYPE];
-    case "is_subscription":
-      return cellValue ? "Yes" : "No";
     default:
       return cellValue;
   }

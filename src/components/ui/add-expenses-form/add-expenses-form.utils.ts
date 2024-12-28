@@ -11,13 +11,6 @@ export const addExpenseRequest = async (data: IAddExpenseFormInput) => {
     amount: parseInt(data.amount),
     bought_from: data.bought_from,
     date: data.date,
-    is_subscription: data.is_subscription,
-    ...(data.expense_type === EXPENSE_TYPE.Food && {
-      weight: data.weight ? parseFloat(data.weight) : undefined,
-      protein_per_100g: data.protein_per_100g
-        ? parseFloat(data.protein_per_100g)
-        : undefined,
-    }),
     luxury_rating: data.luxury_rating,
   };
 
