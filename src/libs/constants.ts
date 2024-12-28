@@ -1,1 +1,1 @@
-export const ITEMS_PER_PAGE = 3; // Number of rows per page
+export const ITEMS_PER_PAGE = 20; // Number of rows per page
