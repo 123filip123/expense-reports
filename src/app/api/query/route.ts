@@ -1,5 +1,5 @@
 // app/api/query/route.ts
-import { supabase } from "@/libs/supabaseClient";
+import { supabase } from "@/libs/supabase/client";
 import { NextResponse } from "next/server";
 
 export async function GET() {

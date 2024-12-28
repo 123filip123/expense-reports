@@ -4,7 +4,7 @@ import {
   IPostExpenseBody,
 } from "@/app/models/expense";
 import { ITEMS_PER_PAGE } from "@/libs/constants";
-import { supabase } from "@/libs/supabaseClient";
+import { supabase } from "@/libs/supabase/client";
 
 export const postExpense = async (body: IPostExpenseBody) => {
   const { data, error } = await supabase

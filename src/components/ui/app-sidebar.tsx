@@ -1,19 +1,11 @@
-import {
-  Calendar,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-  CircleDollarSign,
-  ChartColumnDecreasing,
-} from "lucide-react";
+import { CircleDollarSign, ChartColumnDecreasing } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -22,6 +14,7 @@ import { Button, buttonVariants } from "./button";
 import Image from "next/image";
 import Link from "next/link";
 import { cx } from "@/libs/utils";
+import { logout } from "@/app/api/auth/auth.api";
 
 // Menu items.
 const items = [
@@ -73,6 +66,13 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <div className="flex justify-center">
+          <form action={logout}>
+            <Button variant="destructive">Logout</Button>
+          </form>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }
