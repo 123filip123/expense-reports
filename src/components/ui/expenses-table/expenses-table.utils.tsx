@@ -1,34 +1,29 @@
 import { EXPENSE_TYPE, IExpense } from "@/app/models/expense";
+import { getExpenseTypeName } from "@/libs/helpers/expense-helpers";
+import { ColumnDef } from "@tanstack/react-table";
 import { Key } from "react";
 
-export const columns = [
+export const columns: ColumnDef<IExpense>[] = [
   {
-    key: "name",
-    label: "Name",
+    accessorKey: "name",
+    header: "Name",
   },
   {
-    key: "expense_type",
-    label: "Type",
+    accessorKey: "expense_type",
+    header: "Type",
+    cell: (cell) => getExpenseTypeName(cell.getValue() as number),
   },
   {
-    key: "price",
-    label: "Price",
+    accessorKey: "total_price",
+    header: () => <div className="text-right">Total Price</div>,
+    cell: ({ row: { original } }) => (
+      <div className="text-right">{original.amount * original.price}</div>
+    ),
   },
+
   {
-    key: "amount",
-    label: "Amount",
-  },
-  {
-    key: "bought_from",
-    label: "Bought From",
-  },
-  {
-    key: "date",
-    label: "Date",
-  },
-  {
-    key: "luxury_rating",
-    label: "Luxury Rating",
+    accessorKey: "date",
+    header: "Date",
   },
 ];
 

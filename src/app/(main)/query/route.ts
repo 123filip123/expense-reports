@@ -1,10 +1,12 @@
 // app/api/query/route.ts
 import { supabase } from "@/libs/supabase/client";
+import { createClient } from "@/libs/supabase/server";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const { data, error } = await supabase.from("expense_types").select("*");
+    const supabase = await createClient();
+    const { data, error } = await supabase.from("expenses").select("*");
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });

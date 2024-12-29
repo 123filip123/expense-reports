@@ -1,8 +1,8 @@
 import { EXPENSE_TYPE } from "@/app/models/expense";
-import { formatStringOnlyDigits } from "@/utils";
 import { format } from "date-fns";
 import { UseFormReset, UseFormSetValue } from "react-hook-form";
 import { z } from "zod";
+import { formatStringOnlyDigits } from "./add-expenses-form.utils";
 
 export const addExpenseSchema = z.object({
   expense_name: z.string().min(1, "Name is required"),

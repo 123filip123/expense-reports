@@ -1,13 +1,13 @@
 "use client";
 
 import { ExpensesTable } from "@/components/ui/expenses-table/expenses-table";
-import { PageHeading } from "@/components/ui/page-heading/page-heading";
 import { PageWrapper } from "@/components/ui/page-wrapper/page-wrapper";
+import { TypographyH2 } from "@/components/ui/typography/typography-h2";
 
 export default function Page() {
   return (
     <PageWrapper>
-      <PageHeading>Expenses main page</PageHeading>
+      <TypographyH2 className="mb-6">Expenses</TypographyH2>
       <ExpensesTable />
     </PageWrapper>
   );

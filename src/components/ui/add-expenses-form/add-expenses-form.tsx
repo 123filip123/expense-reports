@@ -10,7 +10,6 @@ import {
 } from "@nextui-org/react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formatStringOnlyDigits } from "@/utils";
 import { EXPENSE_TYPE, EXPENSE_TYPES_ARRAY } from "@/app/models/expense";
 import { ErrorMessage } from "../form/error-message/error-message";
 import {
@@ -20,7 +19,10 @@ import {
   resetFormAndValues,
   setStringValueToNumber,
 } from "./add-expenses-form.form";
-import { addExpenseRequest } from "./add-expenses-form.utils";
+import {
+  addExpenseRequest,
+  formatStringOnlyDigits,
+} from "./add-expenses-form.utils";
 import { useRouter } from "next/navigation";
 
 export const AddExpensesForm = () => {

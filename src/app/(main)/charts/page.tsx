@@ -4,13 +4,15 @@ import { useMonthlyExpenses } from "./useMonthlyExpenses";
 import { getExpenseTypeNames } from "../../models/expense";
 import { BarChart } from "@/components/ui/charts/bar-chart/bar-chart";
 import { PageWrapper } from "@/components/ui/page-wrapper/page-wrapper";
+import { TypographyH2 } from "@/components/ui/typography/typography-h2";
+import { Metadata } from "next";
 
 export default function Page() {
   const { typeExpenses, luxuryExpenses } = useMonthlyExpenses();
 
   return (
     <PageWrapper>
-      <h2 className="text-lg font-semibold my-4">Expense Types</h2>
+      <TypographyH2 className="mb-6">Expenses</TypographyH2>
       <BarChart
         type={"stacked"}
         data={typeExpenses}
@@ -19,8 +21,7 @@ export default function Page() {
         showLegend={false}
         className="mb-4"
       />
-
-      <h2 className="text-lg font-semibold my-4">Luxury Types</h2>
+      <TypographyH2 className="my-6">Luxury Expenses</TypographyH2>
       <BarChart
         type={"stacked"}
         data={luxuryExpenses}

@@ -21,3 +21,7 @@ export const addExpenseRequest = async (data: IAddExpenseFormInput) => {
     return;
   }
 };
+
+export const formatStringOnlyDigits = (str: string) => {
+  return str.replace(/\D/g, "");
+};

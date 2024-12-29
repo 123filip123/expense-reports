@@ -1,15 +1,15 @@
 export enum EXPENSE_TYPE {
-  Food = 1, // green
-  Groceries, // dark blue
-  Household, // dark yellow
-  Utilities, // light blue
-  Health, // red
-  Clothing, // purple
-  Transport, // orange
-  Entertainment, // pink
-  Travel, // light yellow
-  Fitness, // light green
-  Other = 99, // grey
+  Food = 1,
+  Groceries,
+  Health,
+  Clothing,
+  Utilities,
+  Entertainment,
+  Fitness,
+  Household,
+  Transport,
+  Travel,
+  Other = 99,
 }
 export const getExpenseTypeNames = (): string[] => {
   return Object.keys(EXPENSE_TYPE).filter((key) => isNaN(Number(key)));
@@ -17,48 +17,9 @@ export const getExpenseTypeNames = (): string[] => {
 export const EXPENSE_TYPES_ARRAY = Object.entries(EXPENSE_TYPE)
   .filter(([, value]) => typeof value === "number")
   .map(([key, value]) => {
-    let color: string;
-    switch (value) {
-      case EXPENSE_TYPE.Food:
-        color = "#008000"; // green
-        break;
-      case EXPENSE_TYPE.Groceries:
-        color = "#00008B"; // dark blue
-        break;
-      case EXPENSE_TYPE.Household:
-        color = "#B8860B"; // dark yellow
-        break;
-      case EXPENSE_TYPE.Utilities:
-        color = "#ADD8E6"; // light blue
-        break;
-      case EXPENSE_TYPE.Health:
-        color = "#FF0000"; // red
-        break;
-      case EXPENSE_TYPE.Clothing:
-        color = "#800080"; // purple
-        break;
-      case EXPENSE_TYPE.Transport:
-        color = "#FFA500"; // orange
-        break;
-      case EXPENSE_TYPE.Entertainment:
-        color = "#FFC0CB"; // pink
-        break;
-      case EXPENSE_TYPE.Travel:
-        color = "#FFFFE0"; // light yellow
-        break;
-      case EXPENSE_TYPE.Fitness:
-        color = "#90EE90"; // light green
-        break;
-      case EXPENSE_TYPE.Other:
-        color = "#808080"; // grey
-        break;
-      default:
-        color = "#000000"; // Default color if none matches
-    }
     return {
       key: value as number,
       name: key,
-      color,
     };
   });
 
