@@ -13,7 +13,6 @@ import { flexRender } from "@tanstack/react-table";
 import { Button } from "../button";
 import { useExpensesTable } from "./useExpensesTable";
 import { columns } from "./expenses-table.utils";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 export const ExpensesTable = () => {
   const { currentPage, setTotalCount, totalPages, setCurrentPage } =

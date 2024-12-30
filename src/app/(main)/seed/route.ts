@@ -1,5 +1,4 @@
-import { EXPENSE_TYPE, IExpense, IPostExpenseBody } from "@/app/models/expense";
-import { supabase } from "@/libs/supabase/client";
+import { EXPENSE_TYPE, IPostExpenseBody } from "@/app/models/expense";
 import { createClient } from "@/libs/supabase/server";
 import { NextResponse } from "next/server";
 
