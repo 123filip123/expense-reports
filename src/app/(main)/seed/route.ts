@@ -41,71 +41,67 @@ const getRandomExpenseType = (): EXPENSE_TYPE => {
 };
 
 // Seed function
-const seedExpenses = (): IPostExpenseBody[] => {
-  const expenses: IPostExpenseBody[] = [];
-  const currentDate = new Date();
+// const seedExpenses = (): IPostExpenseBody[] => {
+//   const expenses: IPostExpenseBody[] = [];
+//   const currentDate = new Date();
 
-  // Generate data for the last 12 months
-  for (let monthOffset = 0; monthOffset < 12; monthOffset++) {
-    const monthDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() - monthOffset
-    );
-    const totalMonthlySpending = getRandomInt(20000, 45000);
-    let remainingBudget = totalMonthlySpending;
+//   // Generate data for the last 12 months
+//   for (let monthOffset = 0; monthOffset < 12; monthOffset++) {
+//     const monthDate = new Date(
+//       currentDate.getFullYear(),
+//       currentDate.getMonth() - monthOffset
+//     );
+//     const totalMonthlySpending = getRandomInt(20000, 45000);
+//     let remainingBudget = totalMonthlySpending;
 
-    while (remainingBudget > 0) {
-      const price = getRandomInt(500, Math.min(remainingBudget, 5000));
-      const amount = getRandomInt(1, 5);
-      const expenseType = getRandomExpenseType();
+//     while (remainingBudget > 0) {
+//       const price = getRandomInt(500, Math.min(remainingBudget, 5000));
+//       const amount = getRandomInt(1, 5);
+//       const expenseType = getRandomExpenseType();
 
-      const expense: IPostExpenseBody = {
-        name: `${EXPENSE_TYPE[expenseType]} Purchase`,
-        date: new Date(
-          monthDate.getFullYear(),
-          monthDate.getMonth(),
-          getRandomInt(1, 28) // Avoid invalid dates like Feb 30
-        ).toISOString(),
-        expense_type: expenseType,
-        price: price,
-        amount: amount,
-        bought_from: getRandomItem([
-          "Amazon",
-          "Local Store",
-          "Supermarket",
-          "Online",
-        ]),
-        luxury_rating: getRandomInt(1, 3),
-      };
+//       const expense: IPostExpenseBody = {
+//         name: `${EXPENSE_TYPE[expenseType]} Purchase`,
+//         date: new Date(
+//           monthDate.getFullYear(),
+//           monthDate.getMonth(),
+//           getRandomInt(1, 28) // Avoid invalid dates like Feb 30
+//         ).toISOString(),
+//         expense_type: expenseType,
+//         price: price,
+//         amount: amount,
+//         bought_from: getRandomItem([
+//           "Amazon",
+//           "Local Store",
+//           "Supermarket",
+//           "Online",
+//         ]),
+//         luxury_rating: getRandomInt(1, 3),
+//       };
 
-      expenses.push(expense);
-      remainingBudget -= price;
-    }
-  }
+//       expenses.push(expense);
+//       remainingBudget -= price;
+//     }
+//   }
 
-  return expenses;
-};
+//   return expenses;
+// };
 
 // Generate seed data
 
 export async function GET() {
-  try {
-    const supabase = await createClient();
-
-    const seedData = seedExpenses();
-
-    const { data, error } = await supabase.from("expenses").insert(seedData);
-
-    if (error) {
-      console.log("Error seeding expenses:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    return NextResponse.json(data, { status: 200 });
-  } catch {
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
-  }
+  // try {
+  //   const supabase = await createClient();
+  //   const seedData = seedExpenses();
+  //   const { data, error } = await supabase.from("expenses").insert(seedData);
+  //   if (error) {
+  //     console.log("Error seeding expenses:", error);
+  //     return NextResponse.json({ error: error.message }, { status: 500 });
+  //   }
+  //   return NextResponse.json(data, { status: 200 });
+  // } catch {
+  //   return NextResponse.json(
+  //     { error: "Internal Server Error" },
+  //     { status: 500 }
+  //   );
+  // }
 }
