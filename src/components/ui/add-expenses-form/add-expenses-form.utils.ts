@@ -10,8 +10,8 @@ export const addExpenseRequest = async (data: IAddExpenseFormInput) => {
     price: parseFloat(data.price),
     amount: parseInt(data.amount),
     bought_from: data.bought_from,
-    date: data.date,
-    luxury_rating: data.luxury_rating,
+    date: data.date ?? new Date(),
+    luxury_rating: Number(data.luxury_rating) ?? 1,
   };
 
   const { error } = await postExpense(body);

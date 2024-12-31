@@ -11,7 +11,9 @@ export default function Page() {
 
   return (
     <PageWrapper>
-      <TypographyH2 className="mb-6">Expenses</TypographyH2>
+      <div>
+        <TypographyH2 className="mb-6">Type Expenses</TypographyH2>
+      </div>
       <BarChart
         type={"stacked"}
         data={typeExpenses}

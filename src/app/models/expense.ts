@@ -29,7 +29,7 @@ export interface IPostExpenseBody {
   price: number;
   amount: number;
   bought_from?: string;
-  date: string;
+  date: Date;
   luxury_rating?: number;
 }
 
