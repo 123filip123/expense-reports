@@ -1,27 +1,3 @@
-import { EXPENSE_TYPE, IPostExpenseBody } from "@/app/models/expense";
-import { IAddExpenseFormInput } from "./add-expenses-form.form";
-import { postExpense } from "@/app/api/expenses/expenses.api";
-
-export const addExpenseRequest = async (data: IAddExpenseFormInput) => {
-  const body: IPostExpenseBody = {
-    name: data.expense_name,
-    expense_type:
-      data.expense_type === -1 ? EXPENSE_TYPE.Other : data.expense_type,
-    price: parseFloat(data.price),
-    amount: parseInt(data.amount),
-    bought_from: data.bought_from,
-    date: data.date ?? new Date(),
-    luxury_rating: Number(data.luxury_rating) ?? 1,
-  };
-
-  const { error } = await postExpense(body);
-
-  if (error) {
-    console.error("Error inserting expense:", error.message);
-    return;
-  }
-};
-
 export const formatStringOnlyDigits = (str: string) => {
   return str.replace(/\D/g, "");
 };

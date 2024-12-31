@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { login, signup } from "./actions";
+import { login } from "./actions";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { PageWrapper } from "@/components/ui/page-wrapper/page-wrapper";
@@ -23,9 +23,9 @@ export default function LoginPage() {
             />
           </div>
           <Button formAction={login}>Log in</Button>
-          <Button variant="secondary" formAction={signup}>
+          {/* <Button variant="secondary" formAction={signup}>
             Sign up
-          </Button>
+          </Button> */}
         </form>
       </div>
     </PageWrapper>

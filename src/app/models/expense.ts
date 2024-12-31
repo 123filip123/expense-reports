@@ -31,6 +31,8 @@ export interface IPostExpenseBody {
   bought_from?: string;
   date: Date;
   luxury_rating?: number;
+  account_id: string;
+  user_id: string;
 }
 
 export interface IExpense {

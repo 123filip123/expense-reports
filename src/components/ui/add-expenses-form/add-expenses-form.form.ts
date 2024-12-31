@@ -21,6 +21,7 @@ export interface IAddExpenseFormInput {
   bought_from: string;
   date: Date | undefined;
   luxury_rating: string;
+  account_id: string;
 }
 
 export interface IAddExpensesDefaultValues {
@@ -31,6 +32,7 @@ export interface IAddExpensesDefaultValues {
   bought_from: string;
   date: Date | undefined;
   luxury_rating: string;
+  account_id: string;
 }
 
 export const addExpensesFormDefaultValues: IAddExpensesDefaultValues = {
@@ -41,6 +43,7 @@ export const addExpensesFormDefaultValues: IAddExpensesDefaultValues = {
   bought_from: "",
   date: new Date(),
   luxury_rating: "1",
+  account_id: "",
 };
 
 export const addExpensesFormValidationSchema = z.object({
@@ -50,6 +53,7 @@ export const addExpensesFormValidationSchema = z.object({
   amount: z.string().nonempty(),
   bought_from: z.string(),
   date: z.date().optional(),
+  account_id: z.string().nonempty(),
   luxury_rating: z.string().refine((val) => {
     const num = Number(val);
     return num >= 1 && num <= 3;
@@ -65,6 +69,7 @@ export const resetFormAndValues = (
     bought_from: data.bought_from,
     date: data.date,
     expense_type: data.expense_type,
+    account_id: data.account_id,
   };
   reset(defaultValues);
 };

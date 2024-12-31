@@ -10,12 +10,21 @@ import {
   resetFormAndValues,
 } from "./add-expenses-form.form";
 import { Button as ButtonCN } from "@/components/ui/button";
-import { addExpenseRequest } from "./add-expenses-form.utils";
 import { Input as InputCN } from "@/components/ui/input";
 import { ExpenseTypeSelect } from "./expense-type-select";
 import { ExpenseDatePicker } from "./expense-date-picker";
+import { IAccount } from "@/app/models/account";
+import { AccountSelect } from "./account-select";
+import { addExpense } from "@/app/api/expenses/actions";
+import { useToast } from "@/hooks/use-toast";
 
-export const AddExpensesForm = () => {
+interface IAddExpenseFormProps {
+  accounts: IAccount[];
+}
+
+export const AddExpensesForm = ({ accounts }: IAddExpenseFormProps) => {
+  const { toast } = useToast();
+
   const {
     handleSubmit,
     formState: { errors },
@@ -30,18 +39,28 @@ export const AddExpensesForm = () => {
 
   const date = watch("date");
 
-  const onSubmit = async (data: IAddExpenseFormInput) => {
-    try {
-      await addExpenseRequest(data);
+  const addExpenseSubmit = async (formData: IAddExpenseFormInput) => {
+    const response = await addExpense(formData);
 
-      resetFormAndValues(data, reset);
-    } catch (err) {
-      console.error("Unexpected error:", err);
+    if (response.error) {
+      return;
     }
+    toast({
+      title: "Success!",
+      description: "You have added an expense.",
+      duration: 3000,
+    });
+    resetFormAndValues(formData, reset);
   };
+
   return (
     <div className="flex items-center justify-center w-full">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(addExpenseSubmit)}>
+        <AccountSelect
+          setValue={setValue}
+          fieldError={errors.account_id}
+          accounts={accounts}
+        />
         <div className="flex flex-col gap-y-2 items-center max-w-xs">
           <InputCN
             id="expense_name"
