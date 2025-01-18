@@ -1,8 +1,4 @@
-import {
-  IExpense,
-  IMonthlyExpenses,
-  IPostExpenseBody,
-} from "@/app/models/expense";
+import { IExpense, IPostExpenseBody } from "@/app/models/expense";
 import { ITEMS_PER_PAGE } from "@/libs/constants";
 import { supabase } from "@/libs/supabase/client";
 
@@ -29,13 +25,4 @@ export const getExpenses = async (currentPage: number) => {
     .range(from, to); // Specify the range for pagination
 
   return { data: (data ?? []) as IExpense[], error, count: count ?? 0 };
-};
-
-export const getMonthlyExpenses = async () => {
-  const { data, error } = await supabase.rpc("get_monthly_expenses");
-  if (error) {
-    console.error("Error fetching monthly expenses:", error);
-  }
-
-  return { data: data as IMonthlyExpenses[], error };
 };

@@ -48,13 +48,6 @@ export interface IExpense {
   [key: string]: number | string | boolean | undefined;
 }
 
-export interface IGetExpensesFilters {
-  searchName?: string;
-  searchBoughtFrom?: string;
-  expenseTypeFilter?: EXPENSE_TYPE;
-  luxuryRatingFilter?: number;
-}
-
 export interface IMonthlyTypeExpenses {
   month: string; // e.g., "Jan 24"
   [expenseType: string]: number | string; // Dynamic keys for expense types with total spent
@@ -65,8 +58,7 @@ export interface IMonthlyLuxuryExpenses {
   [luxuryRating: string]: number | string; // Dynamic keys for expense types with total spent
 }
 
-export interface IMonthlyExpenses {
-  month: string; // e.g., "Jan 24"
-  expense_types: { [key: number]: number }; // Expense type ID to total spent
-  luxury_ratings: { [key: number]: number }; // Luxury rating to total spent
+export interface IGetMonthlyExpensesParams {
+  months?: number;
+  account_id?: string;
 }
