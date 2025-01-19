@@ -174,23 +174,24 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
     },
-    animation: {
-      hide: "hide 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-      slideDownAndFade: "slideDownAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-      slideLeftAndFade: "slideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-      slideUpAndFade: "slideUpAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-      slideRightAndFade:
-        "slideRightAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-      accordionOpen: "accordionOpen 150ms cubic-bezier(0.87, 0, 0.13, 1)",
-      accordionClose: "accordionClose 150ms cubic-bezier(0.87, 0, 0.13, 1)",
-      dialogOverlayShow:
-        "dialogOverlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-      dialogContentShow:
-        "dialogContentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-      drawerSlideLeftAndFade:
-        "drawerSlideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
-      drawerSlideRightAndFade: "drawerSlideRightAndFade 150ms ease-in",
-    },
+    // Commenting this out because animations are not working (animate-spin is not working)
+    // animation: {
+    //   hide: "hide 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    //   slideDownAndFade: "slideDownAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    //   slideLeftAndFade: "slideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    //   slideUpAndFade: "slideUpAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    //   slideRightAndFade:
+    //     "slideRightAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    //   accordionOpen: "accordionOpen 150ms cubic-bezier(0.87, 0, 0.13, 1)",
+    //   accordionClose: "accordionClose 150ms cubic-bezier(0.87, 0, 0.13, 1)",
+    //   dialogOverlayShow:
+    //     "dialogOverlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    //   dialogContentShow:
+    //     "dialogContentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    //   drawerSlideLeftAndFade:
+    //     "drawerSlideLeftAndFade 150ms cubic-bezier(0.16, 1, 0.3, 1)",
+    //   drawerSlideRightAndFade: "drawerSlideRightAndFade 150ms ease-in",
+    // },
   },
   darkMode: ["class"],
   // plugins: [require("@tailwindcss/forms"), nextui()], // TODO: @tailwindcss/forms causes conflict with nextui Input fields, check if charts work without it

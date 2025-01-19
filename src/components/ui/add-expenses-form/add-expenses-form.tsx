@@ -27,7 +27,7 @@ export const AddExpensesForm = ({ accounts }: IAddExpenseFormProps) => {
 
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     watch,
     setValue,
     register,
@@ -113,7 +113,12 @@ export const AddExpensesForm = ({ accounts }: IAddExpenseFormProps) => {
               )}
             </div>
           </div>
-          <ButtonCN type="submit" className="w-full">
+          <ButtonCN
+            type="submit"
+            className="w-full"
+            isLoading={isSubmitting}
+            disabled={isSubmitting}
+          >
             Add Expense
           </ButtonCN>
         </div>
